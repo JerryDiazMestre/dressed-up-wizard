@@ -69,7 +69,7 @@ export default function SignupFlow() {
                 {
                     0: <UserInformationForm onComplete={updateUserUserValues} />,
                     1: <YourWizardForm onComplete={updateWizardUserValues} />,
-                    2: <YourSidekickForm />,
+                    2: <YourSidekickForm onComplete={updateSidekickUserValues} />,
                     3: <ConfirmationStep user={myUserValues.user} wizard={myUserValues.wizard} sidekick={myUserValues.sidekick} />
                 }[formIndex]
             }

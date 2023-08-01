@@ -34,17 +34,18 @@ export default function UserInformationForm({onComplete}:Props) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
+    console.log(form);
     const data = Object.fromEntries(new FormData(form).entries());
     console.log(data);
     onComplete(
       {
-      name: data.name as string,
-      level: +(data.level as string),
-      school: data.school as string,
-      alignment:
-        (data.alignment as string) === "Good" ?
-          Alignment.GOOD : Alignment.EVIL,
-    }
+        name: data.name as string,
+        level: +(data.level as string),
+        school: data.school as string,
+        alignment:
+          (data.alignment as string) === "Good" ?
+            Alignment.GOOD : Alignment.EVIL,
+      }
     );
   }
 
@@ -61,13 +62,12 @@ export default function UserInformationForm({onComplete}:Props) {
 
             <FormLabel id="school-name-label">School:</FormLabel>
             <Select
-              displayEmpty
+              // displayEmpty
               labelId="school-name-label"
               id="school"
               name="school"
             >
-              <MenuItem key={""} value="">Select School name</MenuItem>
-              {WIZARD_SCHOOLS.map((x) => <MenuItem key={x} value={x}>{x}</MenuItem>)}
+              {['Select School name', ...WIZARD_SCHOOLS].map((x) => <MenuItem key={x} value={x}>{x}</MenuItem>)}
             </Select>
 
             <FormLabel sx={{marginTop:1,fontWeight:700,color:'blue'}} id="alignment-label">Alignment</FormLabel>
