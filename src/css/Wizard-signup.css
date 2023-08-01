@@ -1,0 +1,25 @@
+label {
+    text-align: left;
+    margin-bottom: -10px;
+    margin-left: 10px;
+    background-color: white;
+    z-index: 1;
+    width: fit-content;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    font-size: 12px !important;
+}
+
+p{
+    text-align: left  !important;
+}
+
+[role=alert]{
+    color:red;
+    font-weight: bold;
+    margin-left: 30px;
+}
+
+h4 {
+    text-align: left;
+}
