@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FormEvent} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { FormControl, FormLabel, FormControlLabel, Select, MenuItem, Radio, RadioGroup } from '@mui/material';
@@ -26,10 +26,31 @@ enum Alignment {
     alignment: Alignment;
   }
   
+interface Props {
+  onComplete: (wizard: Wizard) => void;
+}
+  
+export default function UserInformationForm({onComplete}:Props) {
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(form).entries());
+    console.log(data);
+    onComplete(
+      {
+      name: data.name as string,
+      level: +(data.level as string),
+      school: data.school as string,
+      alignment:
+        (data.alignment as string) === "Good" ?
+          Alignment.GOOD : Alignment.EVIL,
+    }
+    );
+  }
 
-export default function UserInformationForm() {
   return (
     <>
+      <form onSubmit={handleSubmit}>
         <h2>Your Wizard</h2>
         <FormControl>
             <FormLabel>Name:</FormLabel>
@@ -61,8 +82,9 @@ export default function UserInformationForm() {
               <FormControlLabel value={Alignment.EVIL} control={<Radio />} label={Alignment.EVIL} />
             </RadioGroup>
 
-            <Button sx={{marginTop:2}} variant="contained">Next</Button>
+            <Button type="submit" sx={{marginTop:2}} variant="contained">Next</Button>
         </FormControl>
+      </form>
     </>
   )
 }

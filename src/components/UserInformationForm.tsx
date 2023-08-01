@@ -10,26 +10,26 @@ export interface User {
     terms: boolean;
     newsletters: boolean;
 }
-function handleSubmit(e: FormEvent) {
-  e.preventDefault();
-  const form = e.target as HTMLFormElement;
-  const data = Object.fromEntries(new FormData(form).entries());
-  // console.log(data);
-}
 
 interface Props {
-  onComplete: (data: User) => void;
-
-    //  onComplete({
-    //   email: data.email as string,
-    //   password: data.password as string,
-    //   confirmPassword: data["confirm-password"] as string,
-    //   newsletter: (data.newsletter as string) === "on",
-    //   terms: (data.terms as string) === "on",
-    // });
-
+  onComplete : (user:User) => void;
 }
-export default function UserInformationForm({onComplete}: Props) {
+
+export default function UserInformationForm({onComplete}:Props) {
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const data = Object.fromEntries(new FormData(form).entries());
+    console.log(data);
+    onComplete(
+      {email: data.email as string,
+      password: data.password as string,
+      confirmPassword: data.confirmPassword as string,
+      newsletters: (data.newsletter as string) === "on",
+      terms: (data.terms as string) === "on"}
+    );
+  }
+  
   return (
     <>
       <form onSubmit={handleSubmit}>

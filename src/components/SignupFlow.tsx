@@ -38,7 +38,6 @@ export default function SignupFlow() {
     const setNextForm = () => setFormIndex( formIndex + 1);
 
     const updateUserUserValues = (user: User): void => {
-        alert(JSON.stringify(user));
         myUserValues.user = user;
         console.log(myUserValues);
         setNextForm();
@@ -58,7 +57,7 @@ export default function SignupFlow() {
 
     return (
         <>
-        <Stepper activeStep={0} alternativeLabel>
+        <Stepper activeStep={formIndex} alternativeLabel>
             {steps.map((label) => (
                 <Step key={label}>
                 <StepLabel>{label}</StepLabel>
@@ -68,8 +67,8 @@ export default function SignupFlow() {
         <div>
             { 
                 {
-                    0: <UserInformationForm onComplete={updateUserUserValues}/>,
-                    1: <YourWizardForm />,
+                    0: <UserInformationForm onComplete={updateUserUserValues} />,
+                    1: <YourWizardForm onComplete={updateWizardUserValues} />,
                     2: <YourSidekickForm />,
                     3: <ConfirmationStep user={myUserValues.user} wizard={myUserValues.wizard} sidekick={myUserValues.sidekick} />
                 }[formIndex]
