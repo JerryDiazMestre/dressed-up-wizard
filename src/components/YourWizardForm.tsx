@@ -1,7 +1,7 @@
 import React, {FormEvent} from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { FormControl, FormLabel, FormControlLabel, Select, MenuItem, Radio, RadioGroup } from '@mui/material';
+import { FormControl, FormLabel, FormControlLabel, Select, MenuItem, Radio, RadioGroup, InputLabel, SelectChangeEvent } from '@mui/material';
 
 enum Alignment {
     GOOD = "Good",
@@ -55,19 +55,20 @@ export default function UserInformationForm({onComplete}:Props) {
         <h2>Your Wizard</h2>
         <FormControl>
             <FormLabel>Name:</FormLabel>
-            <TextField sx={{width:320}} autoFocus id="name" name="name" ></TextField>
+            <TextField sx={{width:320}} autoFocus id="name" name="name" required></TextField>
 
             <FormLabel>Level:</FormLabel>
-            <TextField type="number" id="level" name="level"></TextField>
+            <TextField type="number" id="level" name="level" required></TextField>
 
             <FormLabel id="school-name-label">School:</FormLabel>
             <Select
-              // displayEmpty
-              labelId="school-name-label"
-              id="school"
-              name="school"
+              labelId = "school-name-label"
+              id = "school"
+              name = "school"
+              required
+              defaultValue={''}
             >
-              {['Select School name', ...WIZARD_SCHOOLS].map((x) => <MenuItem key={x} value={x}>{x}</MenuItem>)}
+              {WIZARD_SCHOOLS.map((x) => <MenuItem key={x} value={x}>{x}</MenuItem>)}
             </Select>
 
             <FormLabel sx={{marginTop:1,fontWeight:700,color:'blue'}} id="alignment-label">Alignment</FormLabel>

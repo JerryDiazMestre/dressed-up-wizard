@@ -19,11 +19,10 @@ export default function UserInformationForm({onComplete}:Props) {
     const data = Object.fromEntries(new FormData(form).entries());
     console.log(data);
     onComplete({
-      name: data.sidekick as string,
+      name: data.name as string,
       skill: data.skill as string,
-  });
-}
-
+    });
+  }
   
   return (
     <>
@@ -31,7 +30,7 @@ export default function UserInformationForm({onComplete}:Props) {
         <h2>Your Sidekick</h2>
         <FormControl>
             <FormLabel>Name:</FormLabel>
-            <TextField sx={{width:320}} autoFocus id="name" name="name" ></TextField>
+            <TextField sx={{width:320}} autoFocus id="name" name="name" required></TextField>
 
             <FormLabel>Skill (Optional):</FormLabel>
             <TextField sx={{width:320}} autoFocus id="skill" name="skill" ></TextField>
